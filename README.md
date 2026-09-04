@@ -10,6 +10,25 @@ whether green actually means correct.
 
 **Read `ARCHITECTURE.md` before the code.**
 
+## Agent used
+Codex with 5.6 Sol, medium.
+
+## M2
+The calculator omitted the final free interval after the last booking.
+
+## M3
+- **Controllability gap:** None of the exact-result tests had free time left after
+  the last booking. The last booking always went to closing time, so the bug did
+  not show up in those tests.
+- **Controllability gap:** There was no test with an empty booking list. That case
+  should return the whole day as free, but the buggy code returned nothing.
+- **Observability gap:** The overlap test did use a booking that ended early, but it
+  only looked at the slots that were returned. It did not check whether any free
+  time was missing.
+
+The line coverage was high because the tests ran most of the code that was there.
+It could not tell us that the code for adding the last free slot was missing.
+
 ## Build and test
 
 ```
